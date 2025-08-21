@@ -1,0 +1,23 @@
+// Import Variables
+@use "../../sass/helpers/variables" as *;
+
+.main-heading {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 25px;
+
+  .title,
+  .sub-title {
+    font-size: 26px;
+    font-weight: 700;
+  }
+
+  .sub-title {
+    color: $blue;
+  }
+
+  .img {
+    width: 35px;
+  }
+}

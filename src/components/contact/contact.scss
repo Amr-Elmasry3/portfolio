@@ -1,0 +1,199 @@
+// Import Variables
+@use "../../sass/helpers/variables" as *;
+
+// Import Mixins
+@use "../../sass/helpers/mixins" as *;
+
+.contact-me {
+  .contact-content {
+    display: flex;
+    gap: 30px;
+
+    @include breakpoints("xl") {
+      flex-direction: column;
+    }
+
+    .contact-info {
+      width: fit-content;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+
+      .box {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+
+        .icon-box {
+          width: 38px;
+          height: 38px;
+          border-radius: 50%;
+          background-color: #4d9bff33;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          .icon {
+            font-size: 20px;
+            color: $blue;
+          }
+        }
+
+        .details {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+
+          .key {
+            width: fit-content;
+            font-size: 16px;
+            font-weight: 700;
+          }
+
+          .value {
+            font-size: 14px;
+            font-weight: 500;
+            transition: $transition;
+
+            &:hover {
+              color: $blue;
+            }
+          }
+        }
+      }
+
+      .available {
+        width: 200px;
+        background-color: $light-blue;
+        padding: 10px;
+        border: 1px solid $blue;
+        border-radius: $radius-two;
+
+        @include breakpoints("xl") {
+          width: 100%;
+        }
+
+        .active {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          font-size: 15px;
+          font-weight: 600;
+
+          span {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #22c55e;
+          }
+        }
+
+        .description {
+          font-size: 13px;
+          margin: 5px 0 0;
+        }
+      }
+    }
+
+    .contact-form {
+      flex: 1;
+      border: 1px solid $blue;
+      padding: 15px;
+      position: relative;
+
+      form {
+        margin: 15px 0 0;
+
+        .box {
+          display: flex;
+          flex-direction: column;
+          gap: 3px;
+          margin: 0 0 10px;
+
+          label {
+            font-size: 12px;
+            font-weight: 500;
+
+            span {
+              color: $blue;
+            }
+          }
+
+          .input-box {
+            border-radius: $radius-two;
+            border: 1px solid $d-light-gray;
+            padding: 0 7px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: $transition;
+
+            &:focus-within {
+              border-color: $blue;
+            }
+
+            &.error {
+              border-color: red;
+            }
+
+            input,
+            textarea {
+              flex: 1;
+              height: 36px;
+              font-size: 15px;
+              background-color: transparent;
+            }
+
+            textarea {
+              height: 120px;
+              resize: none;
+            }
+
+            .error-icon {
+              font-size: 18px;
+              color: red;
+              display: none;
+            }
+          }
+
+          .error-message {
+            font-size: 12px;
+            color: red;
+          }
+        }
+
+        .button {
+          background-color: $blue;
+          color: $white-color;
+          width: 100%;
+          padding: 14px;
+          justify-content: center;
+        }
+      }
+
+      .notify {
+        position: absolute;
+        top: 20px;
+        right: 15px;
+        width: fit-content;
+        text-align: end;
+        background-color: #22c55e;
+        padding: 7px 12px;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        color: white;
+        display: none;
+        $transition: $transition;
+
+        &.open {
+          display: block;
+        }
+
+        &.error {
+          background-color: red;
+        }
+      }
+    }
+  }
+}

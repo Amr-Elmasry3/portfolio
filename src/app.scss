@@ -1,0 +1,77 @@
+// Import Variables
+@use "./sass/helpers/variables" as *;
+
+// Import Mixins
+@use "./sass/helpers/mixins" as *;
+
+.app {
+  background-color: $light-white;
+  transition: $transition;
+
+  &.dark {
+    background-color: $very-dark-blue;
+  }
+
+  .container {
+    padding: 20px;
+    display: flex;
+    gap: 15px;
+    height: 100vh;
+
+    @include breakpoints("md") {
+      flex-direction: column;
+      height: initial;
+      padding: 10px 10px 60px;
+    }
+
+    &.dark {
+      .links,
+      .profile,
+      .content,
+      .project,
+      .project-details-content,
+      .contact-form {
+        background-color: $dark-blue;
+      }
+    }
+
+    .links,
+    .profile,
+    .content,
+    .project,
+    .project-details-content,
+    .contact-form {
+      border-radius: $radius-one;
+      box-shadow: $shadow-one;
+      background-color: $white-color;
+      transition: $transition;
+      overflow: hidden;
+    }
+
+    .sidebar {
+      @include breakpoints("md") {
+        border-top-left-radius: $radius-one;
+        border-top-right-radius: $radius-one;
+        box-shadow: $shadow-one;
+        background-color: $white-color;
+        transition: $transition;
+
+        &.dark {
+          background-color: $dark-blue;
+        }
+      }
+    }
+
+    .profile {
+      width: 380px;
+
+      @include breakpoints("md") {
+        width: 100%;
+      }
+    }
+
+    .content {
+      flex: 1;
+    }
+  }
+}

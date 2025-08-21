@@ -1,0 +1,113 @@
+// Import Variables
+@use "../../sass/helpers/variables" as *;
+
+// Import Mixins
+@use "../../sass/helpers/mixins" as *;
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin: 20px 0 0;
+  position: relative;
+  width: fit-content;
+  padding: 0;
+
+  @include breakpoints("md") {
+    margin: 0;
+    position: fixed;
+    z-index: 10;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    gap: 12px;
+  }
+
+  .settings {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-color: $blue;
+
+    @include breakpoints("md") {
+      display: none;
+    }
+
+    .icon {
+      font-size: 24px;
+      color: $white-color;
+    }
+  }
+
+  .links {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 15px 5px;
+    border-radius: $radius-one;
+    box-shadow: $shadow-one;
+    background-color: $white-color;
+
+    @include breakpoints("md") {
+      padding: 7px 0 4px;
+      width: 100%;
+      flex-direction: row-reverse;
+      justify-content: space-between;
+      border-radius: 0;
+      background-color: transparent;
+    }
+
+    &.dark {
+      a {
+        color: $d-light-gray;
+      }
+    }
+
+    a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 7px;
+      font-size: 13px;
+      font-weight: 500;
+      color: $l-dark-gray;
+      text-transform: capitalize;
+      padding: 7px;
+      border-radius: $radius-three;
+      transition: $transition;
+      cursor: pointer;
+      color: $l-dark-gray;
+
+      &:first-of-type {
+        display: none;
+      }
+
+      @include breakpoints("md") {
+        font-size: 10px;
+        gap: 4px;
+        width: calc(25% - 3px);
+
+        &:first-of-type {
+          display: flex;
+        }
+      }
+
+      &:hover {
+        background-color: #d1d5db2e;
+      }
+
+      .icon {
+        font-size: 20px;
+
+        @include breakpoints("md") {
+          font-size: 17px;
+        }
+      }
+    }
+  }
+}

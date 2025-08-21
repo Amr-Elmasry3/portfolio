@@ -1,0 +1,9 @@
+// Import Variables
+@use "../../sass/helpers/variables" as *;
+
+.about-me {
+  .description {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+}
