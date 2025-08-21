@@ -32,7 +32,7 @@ function ContactInfo() {
           <span className="key same-title">Phone</span>
 
           <a
-            href="https://wa.me/+201026567600?text=Hello%20there%20How%20can%20i%20help%20you"
+            href="https://wa.me/+201026567600"
             target="_blank"
             className="value same-text"
           >
