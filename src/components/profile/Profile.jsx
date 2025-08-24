@@ -57,7 +57,7 @@ function Profile({ mode }) {
 
         <div className="buttons">
           <a
-            href={`${window.location.origin}/portfolio/cv.pdf`}
+            href={`${window.location.origin}/portfolio/new_amr_cv.pdf`}
             target="_blanck"
           >
             <button className="button cv">
