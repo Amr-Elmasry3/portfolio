@@ -29,31 +29,26 @@ function ContactForm() {
   const [isLoader, setIsLoader] = useState(false);
 
   const formik = useFormik({
-    initialValues: {
-      name: "",
-      email: "",
-      subject: "",
-      message: "",
-    },
+    initialValues: { name: "", email: "", subject: "", message: "" },
     validationSchema: messageSchema,
+    validateOnBlur: true,
+    validateOnChange: true,
     onSubmit: async (values) => {
       setIsLoader(true);
-
       try {
         await emailjs.send("service_l6aez08", "template_i04o6hj", values, {
           publicKey: "MfecL-tolKncfTXDA",
         });
-
         setIsLoader(false);
         setMessageState("Message sent");
+        setTimeout(() => setMessageState(""), 6000);
         formik.resetForm();
       } catch (error) {
-        console.error("Email sending error:", error);
+        console.error("FAILED...", error.text);
         setIsLoader(false);
         setMessageState("Message not sent");
+        setTimeout(() => setMessageState(""), 6000);
       }
-
-      setTimeout(() => setMessageState(""), 5000);
     },
   });
 
@@ -78,23 +73,33 @@ function ContactForm() {
             Your Name <span>*</span>
           </label>
 
-          <div className="input-box">
+          <div
+            className={`input-box ${formik.touched.name && formik.errors.name ? "error" : null}`}
+          >
             <input
               type="text"
-              name="name"
               value={formik.values.name}
+              name="name"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
+              autoComplete="off"
+              className="same-title"
             />
 
             <IoMdInformationCircleOutline
               className="error-icon"
               style={{
                 display:
-                  formik.touched.name && formik.errors.name ? "block" : "none",
+                  formik.touched.name && formik.errors.name ? "block" : null,
               }}
             />
           </div>
+
+          {formik.touched.name && formik.errors.name ? (
+            <p className="error-message">{formik.errors.name}</p>
+          ) : (
+            ""
+          )}
         </motion.div>
 
         {/* EMAIL */}
@@ -106,9 +111,33 @@ function ContactForm() {
         >
           <label className="same-title">Email *</label>
 
-          <div className="input-box">
-            <input type="email" name="email" value={formik.values.email} />
+          <div
+            className={`input-box ${formik.touched.email && formik.errors.email ? "error" : null}`}
+          >
+            <input
+              type="email"
+              value={formik.values.email}
+              name="email"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              autoComplete="off"
+              className="same-title"
+            />
+
+            <IoMdInformationCircleOutline
+              className="error-icon"
+              style={{
+                display:
+                  formik.touched.email && formik.errors.email ? "block" : null,
+              }}
+            />
           </div>
+
+          {formik.touched.email && formik.errors.email ? (
+            <p className="error-message">{formik.errors.email}</p>
+          ) : (
+            ""
+          )}
         </motion.div>
 
         {/* SUBJECT */}
@@ -120,9 +149,35 @@ function ContactForm() {
         >
           <label className="same-title">Subject *</label>
 
-          <div className="input-box">
-            <input type="text" name="subject" value={formik.values.subject} />
+          <div
+            className={`input-box ${formik.touched.subject && formik.errors.subject ? "error" : null}`}
+          >
+            <input
+              type="text"
+              value={formik.values.subject}
+              name="subject"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              autoComplete="off"
+              className="same-title"
+            />
+
+            <IoMdInformationCircleOutline
+              className="error-icon"
+              style={{
+                display:
+                  formik.touched.subject && formik.errors.subject
+                    ? "block"
+                    : null,
+              }}
+            />
           </div>
+
+          {formik.touched.subject && formik.errors.subject ? (
+            <p className="error-message">{formik.errors.subject}</p>
+          ) : (
+            ""
+          )}
         </motion.div>
 
         {/* MESSAGE */}
@@ -134,29 +189,54 @@ function ContactForm() {
         >
           <label className="same-title">Message *</label>
 
-          <div className="input-box">
-            <textarea name="message" value={formik.values.message} />
+          <div
+            className={`input-box ${formik.touched.message && formik.errors.message ? "error" : null}`}
+          >
+            <textarea
+              value={formik.values.message}
+              name="message"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              autoComplete="off"
+              className="same-title"
+            />
+
+            <IoMdInformationCircleOutline
+              className="error-icon"
+              style={{
+                display:
+                  formik.touched.message && formik.errors.message
+                    ? "block"
+                    : null,
+              }}
+            />
           </div>
+
+          {formik.touched.message && formik.errors.message ? (
+            <p className="error-message">{formik.errors.message}</p>
+          ) : (
+            ""
+          )}
         </motion.div>
 
         {/* BUTTON */}
         <motion.button
           className="button"
           type="submit"
+          style={{ cursor: isLoader ? "wait" : null }}
           variants={field}
           initial="hidden"
           whileInView="visible"
         >
-          {isLoader ? <BeatLoader size={10} /> : "Send Message"}
+          {isLoader ? <BeatLoader color="#FFFFFF" size={12} /> : "Send Message"}
         </motion.button>
       </form>
 
       <span
-        className={`notify ${
-          messageState === "Message not sent" ? "error" : ""
-        } ${messageState ? "open" : ""}`}
+        className={`notify ${messageState === "Message not sent" ? "error" : ""} ${messageState !== "" ? "open" : ""}`}
       >
-        {messageState}
+        {" "}
+        {messageState}{" "}
       </span>
     </motion.div>
   );
