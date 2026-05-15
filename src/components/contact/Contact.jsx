@@ -9,7 +9,7 @@ import ContactForm from "./ContactForm";
 function Contact({ mode }) {
   return (
     <div className={`contact-me ${mode}`} id="contact-me">
-      <MainHeading title="Get" subTitle="In Touch" img="chat" />
+      <MainHeading title="Get" subTitle="In Touch" />
 
       <div className="contact-content">
         <ContactInfo />

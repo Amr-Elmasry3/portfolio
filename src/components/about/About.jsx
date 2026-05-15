@@ -4,21 +4,42 @@ import "./about.scss";
 // Import Components
 import MainHeading from "../main_heading/MainHeading";
 
+// Import Libraries
+// eslint-disable-next-line no-unused-vars
+import { motion } from "framer-motion";
+
+// Import Animations
+import { aboutContainer, aboutWord } from "../../animations";
+
 function About() {
+  const text =
+    "I'm a Frontend Developer with hands-on experience building modern and responsive web applications using React.js, Next.js, and TypeScript. I’ve built several projects, including a real-time chat application and a React-based e-commerce platform, where I worked on responsive UI, state management, API integration, and performance optimization. I enjoy creating clean and user-friendly interfaces while continuously improving my skills through real-world projects and modern frontend technologies.";
+
+  const words = text.split(" ");
+
   return (
     <div className="about-me" id="about-me">
-      <MainHeading title="Hey" subTitle="there!" img="boy" />
+      <MainHeading title="Hey" subTitle="there!" />
 
-      <p className="description same-text">
-        I'm thrilled to tell you a bit about myself, I'm Enthusiastic Front-end
-        Developer (recent graduate) with a strong understanding of HTML5, CSS3
-        and JavaScript. Developed 5+ projects using React.js and Responsive
-        Design, including an [e-commerce website] with [real-time cart updates].
-        Eager to join a team where I can contribute to building user-friendly
-        web applications while expanding my expertise. Committed to learning
-        other technologies such as Next.js and TypeScript to stay at the
-        forefront of web development.
-      </p>
+      <motion.p
+        className="description same-text"
+        variants={aboutContainer}
+        initial="hidden"
+        whileInView="visible"
+      >
+        {words.map((w, i) => (
+          <motion.span
+            key={i}
+            variants={aboutWord}
+            style={{
+              display: "inline-block",
+              marginRight: "6px",
+            }}
+          >
+            {w}
+          </motion.span>
+        ))}
+      </motion.p>
     </div>
   );
 }

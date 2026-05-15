@@ -7,6 +7,7 @@ import ProjectDetails from "../project_details/ProjectDetails";
 
 // Import Data
 import { projects } from "../../Data";
+import { allSkills } from "../../skills";
 
 // Import React icons
 import { FaGithub } from "react-icons/fa";
@@ -14,6 +15,13 @@ import { RiShareBoxLine } from "react-icons/ri";
 
 // Import Hooks
 import { useState } from "react";
+
+// Import Framer Motion
+// eslint-disable-next-line no-unused-vars
+import { motion } from "framer-motion";
+
+// Import Animations
+import { boxVariantsProjects } from "../../animations";
 
 function Projects({ mode }) {
   const [projectId, setProjecttId] = useState(0);
@@ -24,34 +32,24 @@ function Projects({ mode }) {
 
   return (
     <div className={`my-projects ${mode}`} id="my-projects">
-      <MainHeading title="My" subTitle="Projects" img="rocket" />
+      <MainHeading title="My" subTitle="Projects" />
 
       <div className="my-projects-content">
         {projects.map((item) => {
           return (
-            <div className="project" key={item.id}>
+            <motion.div
+              className="project"
+              key={item.id}
+              variants={boxVariantsProjects}
+              initial={{
+                opacity: 0,
+                x: item.id % 2 === 0 ? 80 : -80,
+                filter: "blur(7px)",
+              }}
+              whileInView="visible"
+            >
               <div className="img-box">
                 <img src={item.images[0]} alt={`img${item.id}...`} />
-
-                <div className="some-details">
-                  <h4 className="title">{item.title}</h4>
-
-                  <p className="description">{item.description}</p>
-                </div>
-
-                <div className="actions">
-                  <a href={item.github} className="icon-box" target="_blanck">
-                    <FaGithub className="icon" />
-
-                    <span>Code</span>
-                  </a>
-
-                  <a href={item.demo} className="icon-box" target="_blanck">
-                    <RiShareBoxLine className="icon" />
-
-                    <span>Demo</span>
-                  </a>
-                </div>
               </div>
 
               <div className="details">
@@ -65,26 +63,32 @@ function Projects({ mode }) {
                 </h4>
 
                 <div className="skills">
-                  {item.technicals.slice(0, 3).map((skill, index) => {
+                  {item.technicals.map((skill, index) => {
                     return (
-                      <span className="skill same-text" key={item.id + index}>
-                        {skill}
-                      </span>
+                      <div className="skill same-text" key={item.id + index}>
+                        {allSkills[skill]}
+                      </div>
                     );
                   })}
-
-                  {item.technicals.length - 3 ? (
-                    <span className="same-text">
-                      +{item.technicals.length - 3}
-                    </span>
-                  ) : (
-                    ""
-                  )}
                 </div>
               </div>
 
+              <div className="actions">
+                <a href={item.demo} className="icon-box" target="_blanck">
+                  <RiShareBoxLine className="icon" />
+
+                  <span>Demo</span>
+                </a>
+
+                <a href={item.github} className="icon-box" target="_blanck">
+                  <FaGithub className="icon" />
+
+                  <span>Code</span>
+                </a>
+              </div>
+
               {item.badge ? <span className="badge">{item.badge}</span> : ""}
-            </div>
+            </motion.div>
           );
         })}
       </div>

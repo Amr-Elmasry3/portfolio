@@ -13,7 +13,7 @@ import { PageModeContext } from "./contexts/PageModeContext";
 import { useState } from "react";
 
 function App() {
-  const [mode, setIsMode] = useState("light");
+  const [mode, setIsMode] = useState("dark");
 
   const handleMode = (mode) => {
     setIsMode(mode);

@@ -10,54 +10,34 @@
     background-color: $very-dark-blue;
   }
 
-  .taps {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 7px;
-    padding: 15px 0 0;
-    margin: 0 0 30px;
-
-    li {
-      background-color: $l-light-gray;
-      padding: 8px 12px;
-      border-radius: 6px;
-      font-size: 13px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: $transition;
-
-      &.active {
-        background-color: $blue;
-        color: $white-color;
-      }
-    }
-  }
-
   .skills-content {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 15px 10px;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px 10px;
 
     .box {
       height: fit-content;
       display: flex;
-      flex-direction: column;
-      gap: 10px;
+      gap: 14px;
       align-items: center;
-      justify-content: center;
       background-color: $light-blue;
-      padding: 20px;
-      border-radius: $radius-one;
+      padding: 14px 18px;
+      border-radius: 10px;
       border: 1px solid $blue;
-      height: 110px;
       color: $blue;
 
+      &:hover > span {
+        color: $blue-2;
+        transition: $transition;
+        -webkit-transition: $transition;
+        -moz-transition: $transition;
+        -ms-transition: $transition;
+        -o-transition: $transition;
+      }
+
       svg {
-        width: 30px;
-        min-height: 30px;
-        height: fit-content;
+        width: 20px;
+        height: 20px;
         fill: $blue;
       }
 
